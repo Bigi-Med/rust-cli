@@ -56,7 +56,7 @@ fn read_file(file: std::path::PathBuf) -> String {
 
 fn search_patterns(content: String, pattern: String) {
     for line in content.lines() {
-        if line.contains(pattern) {
+        if line.contains(&pattern) {
             println!("{}", line);
         }
     }
