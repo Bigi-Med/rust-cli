@@ -9,9 +9,8 @@ fn main() {
     let args = std::env::args();
     match cli_parser(args) {
         Ok(cli) => {
-            println!("pattern: {:?}, path: {:?}", cli.pattern, cli.path);
             let content = read_file(cli.path);
-            println!("Content of file is : {:?},", content);
+            search_patterns(content, cli.pattern);
         }
         Err(e) => {
             eprintln!("Error: {} \n", e);
@@ -53,4 +52,12 @@ fn read_file(file: std::path::PathBuf) -> String {
         }
     };
     return file_content;
+}
+
+fn search_patterns(content: String, pattern: String) {
+    for line in content.lines() {
+        if line.contains(pattern) {
+            println!("{}", line);
+        }
+    }
 }
