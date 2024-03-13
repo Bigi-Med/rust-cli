@@ -1,4 +1,6 @@
 use core::panic;
+extern crate regex;
+use regex::Regex;
 
 struct Cli {
     pattern: String,
@@ -61,8 +63,9 @@ fn read_file(file: std::path::PathBuf) -> String {
 }
 
 fn search_patterns(content: String, pattern: String) {
+    let myRegex = Regex::new(&pattern).unwrap();
     for line in content.lines() {
-        if line.contains(&pattern) {
+        if myRegex.is_match(line) {
             println!("{}", line);
         }
     }
