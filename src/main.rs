@@ -14,7 +14,7 @@ fn main() {
         }
         Err(e) => {
             eprintln!("Error: {} \n", e);
-            eprintln!("USAGE: \n grap <pattern> <path>");
+            eprintln!("USAGE: \n grasp <pattern> <path>");
         }
     }
 }
@@ -31,6 +31,12 @@ fn cli_parser(mut args: std::env::Args) -> Result<Cli, String> {
             );
         }
     };
+
+    if pattern == "--help" {
+        println!("USAGE: \n grasp <pattern> <path>");
+        std::process::exit(0);
+    }
+
     let path = match args.nth(0) {
         Some(args) => args,
         None => return Err("The following required argument was not given: \n <Path>".to_string()),
